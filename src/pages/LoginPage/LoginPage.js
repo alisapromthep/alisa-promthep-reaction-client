@@ -1,9 +1,13 @@
 import React from 'react';
+import './LoginPage.scss';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 function LoginPage(props) {
     return (
         <div>
-            This is Login Page
+            Login
+            <LoginForm />
+
         </div>
     );
 }

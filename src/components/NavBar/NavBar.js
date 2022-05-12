@@ -1,7 +1,7 @@
 import React from 'react';
-import './NewEntryForm.scss';
+import './NavBar.scss'
 
-function NewEntryForm(props) {
+function NavBar(props) {
     return (
         <div>
             
@@ -9,4 +9,4 @@ function NewEntryForm(props) {
     );
 }
 
-export default NewEntryForm;
+export default NavBar;
