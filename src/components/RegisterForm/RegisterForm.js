@@ -4,27 +4,46 @@ function SignupForm(props) {
     return (
         <div>
             <form>
-                <label>
+                <label
+                name='name'>
                     Name
-                    <input />
+                    <input
+                    name='name'
+                    type='text'
+                    placeholder='name' />
                 </label>
-                <label>
+                <label
+                name='username'>
                     Username
-                    <input />
+                    <input
+                    name='username'
+                    type='text'
+                    placeholder='username' />
                 </label>
-                <label>
+                <label
+                name='password'>
                     Password
-                    <input />
+                    <input
+                    name='=password'
+                    type='password'
+                    placeholder='password' />
                 </label>
-                <label>
+                <label
+                name='phone'>
                     Phone number 
-                    <input />
+                    <input
+                    name='phone'
+                    type='text'
+                    placeholder='Phone Number' />
                 </label>
-                <label>
+                <label
+                name='email'>
                     Email 
-                    <input />
+                    <input
+                    name='email'
+                    type='email'
+                    placeholder='Email' />
                 </label>
-
             </form>
         </div>
     );

@@ -6,11 +6,17 @@ function LoginForm(props) {
             <form>
                 <label name='username'>
                     Username
-                    <input type='text' name='username' />
+                    <input
+                    type='text'
+                    name='username'
+                    placeholder='username' />
                 </label>
                 <label name='password'>
                     Password
-                    <input type='password' name='password' />
+                    <input
+                    type='password'
+                    name='password'
+                    placeholder='password' />
                 </label>
             </form>
         </div>

@@ -6,8 +6,12 @@ function NewEntryForm(props) {
         <div>
             <form>
                 <p>today's date</p>
-                <label>
-                    
+                <p>time of day</p>
+                <label name='food'>
+                    <input
+                    name='food'
+                    type='text'
+                    />
                 </label>
             </form>
         </div>
