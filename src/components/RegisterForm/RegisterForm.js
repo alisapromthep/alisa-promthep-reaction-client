@@ -16,6 +16,15 @@ function SignupForm(props) {
                     Password
                     <input />
                 </label>
+                <label>
+                    Phone number 
+                    <input />
+                </label>
+                <label>
+                    Email 
+                    <input />
+                </label>
+
             </form>
         </div>
     );
