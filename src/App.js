@@ -5,6 +5,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 
+export const API_URL = process.env.REACT_APP_API_URL;
+
 function App() {
   return (
     <div>
