@@ -1,9 +1,13 @@
 import React from 'react';
 
-function LoginForm(props) {
+function LoginForm({handleLogin}) {
+
+
     return (
         <div>
-            <form>
+            <form
+            onSubmit={handleLogin}
+            >
                 <label name='username'>
                     Username
                     <input
@@ -18,6 +22,7 @@ function LoginForm(props) {
                     name='password'
                     placeholder='password' />
                 </label>
+                <button type='submit'> Login </button>
             </form>
         </div>
     );

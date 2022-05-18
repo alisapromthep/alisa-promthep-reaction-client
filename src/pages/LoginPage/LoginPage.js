@@ -1,13 +1,18 @@
 import React from 'react';
 import './LoginPage.scss';
 import LoginForm from '../../components/LoginForm/LoginForm';
+
 import {Link} from 'react-router-dom';
 
-function LoginPage(props) {
+function LoginPage({handleLogin}) {
+
+
     return (
         <div>
             Login
-            <LoginForm />
+            <LoginForm
+            handleLogin={handleLogin}
+            />
             <p> or 
             <Link to='/register'>
                 Register here

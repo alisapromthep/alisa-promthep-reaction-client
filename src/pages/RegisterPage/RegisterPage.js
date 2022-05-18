@@ -62,8 +62,6 @@ class RegisterPage extends Component {
 
     }
 
-
-
     render () {
 
         return (
