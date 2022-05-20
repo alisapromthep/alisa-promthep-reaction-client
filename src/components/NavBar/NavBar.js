@@ -7,7 +7,7 @@ function NavBar(props) {
         <nav>
             <NavLink> Calender </NavLink>
             <NavLink> New Entry </NavLink>
-            <NavLink> Analytics </NavLink>
+            <NavLink> Summary </NavLink>
         </nav>
     );
 }
