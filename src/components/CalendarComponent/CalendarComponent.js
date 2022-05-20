@@ -5,10 +5,10 @@ import './CalendarComponent.scss';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-function CalendarComponent(props) {
+function CalendarComponent({symptomIcons}) {
     return (
         <div>
-            <Calendar />
+            <Calendar tileContent={ ({ date, view }) => view === 'month' && date.getDay() === 0 ? <p>component</p> : null} />
 
             
         </div>

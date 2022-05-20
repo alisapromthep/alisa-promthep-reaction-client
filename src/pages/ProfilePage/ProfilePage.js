@@ -12,14 +12,20 @@ class ProfilePage extends Component {
     }
 
     handleSymptoms = (event)=>{
-        console.log(event.target.value)
+
+        const check = event.target.checked
         const selectSymptom = event.target.value
+        //check if the checked is true or false, to avoid double when uncheck
 
-        this.setState({selectSymptoms: [...this.state.selectSymptoms, selectSymptom]}, ()=>{
-            console.log(this.state.selectSymptoms)
-        })
-
+        if(check){
+            this.setState({selectSymptoms: [...this.state.selectSymptoms, selectSymptom]}, ()=>{
+                console.log(this.state.selectSymptoms)
+            })
+        } else {
+            this.setState({selectSymptom: this.state.selectSymptoms.pop(selectSymptom)})
+        }
     }
+
     handleFood = (event)=>{
         console.log(event.target.value)
         const food = event.target.value
@@ -36,25 +42,26 @@ class ProfilePage extends Component {
 
         console.log('submit:',this.state.selectFood, this.state.selectSymptoms)
         console.log(event.target.time.value)
+        const username = "test";
 
-        // const newEntry = {
-        //     username: x,
-        //     data: {todaysDate},
-        //     time_of_day: event.target.time.value,
-        //     food: this.state.selectFood,
-        //     symptom: this.state.selectSymptoms,
-        //     notes: event.target.notes.value
-        // }
+        const newEntry = {
+            username: username,
+            data: "01/01/22",
+            time_of_day: event.target.time.value,
+            food: this.state.selectFood,
+            symptom: this.state.selectSymptoms,
+            notes: event.target.notes.value
+        }
 
-        // axios
-        //     .get('http://localhost:8080/user/username', {
-        //         headers:{
-        //             Authorization: `Bearer ${sessionStorage.getItem('token')}`
-        //         }
-        //     })
-        //     .then((res)=>{
-        //         console.log(res)
-        //     })
+        axios
+            .post(`http://localhost:8080/user/entry/${username}`, newEntry, {
+                headers:{
+                    Authorization: `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then((res)=>{
+                console.log(res)
+            })
 
     }
 
@@ -86,7 +93,9 @@ class ProfilePage extends Component {
             return (
                 <div>
                     This is profile page
-                    <CalendarComponent />
+                    <CalendarComponent
+                    symptomIcons={this.state.symptomIcons}
+                    />
                     <NewEntryForm
                     handleSymptoms={this.handleSymptoms}
                     handleFood={this.handleFood}
