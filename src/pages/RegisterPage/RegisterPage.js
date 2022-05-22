@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './RegisterPage.scss'
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 class RegisterPage extends Component {
 
@@ -11,6 +12,7 @@ class RegisterPage extends Component {
         password: "",
         phone: "",
         email: "",
+        isRegister: false,
     }
 
     handleChange = (event) => {
@@ -52,17 +54,22 @@ class RegisterPage extends Component {
                     email: this.state.email
                 })
                 .then((response)=>{
-                    console.log(response)
-                    console.log(`new user is added`)
+                    console.log(response);
+                    console.log(`new user is added`);
+                    this.setState({isRegister: true});
+                    
                 })
                 .catch((err)=>{
-                    console.log(`problem registering`)
+                    console.log(`problem registering`);
                 })
         }
 
     }
 
     render () {
+        if(this.state.isRegister){
+            return <Redirect to='/login' />
+        }
 
         return (
             <div>

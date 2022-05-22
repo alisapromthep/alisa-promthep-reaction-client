@@ -4,11 +4,18 @@ import './CalendarComponent.scss';
 // import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import CalendarEvent from '../CalendarEvent/CalendarEvent';
 
-function CalendarComponent({symptomIcons}) {
+function CalendarComponent({userLogArray, foodIcons}) {
     return (
         <div>
-            <Calendar tileContent={ ({ date, view }) => view === 'month' && date.getDay() === 0 ? <p>component</p> : null} />
+            <Calendar
+            tileContent={ ({ date, view }) => {
+                // console.log('date', date.getDate())
+                // console.log('month',date.getMonth())
+                // console.log(date.getFullYear())
+                return view === 'month' && date.getDay() === 0 ? <CalendarEvent/>
+            : null} }/>
 
             
         </div>

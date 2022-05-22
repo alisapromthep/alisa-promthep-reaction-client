@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import CalendarComponent from '../../components/CalendarComponent/CalendarComponent';
 import NewEntryForm from '../../components/NewEntryForm/NewEntryForm';
+import Summary from '../../components/Summary/Summary';
 import axios from 'axios';
+
+const header = {
+    headers:{
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    }
+};
+
 class ProfilePage extends Component {
+
 
     state = {
         foodIcons: [],
         symptomIcons: [],
         selectSymptoms: [],
+        userLogs: [],
         selectFood: "",
     }
 
@@ -42,25 +52,24 @@ class ProfilePage extends Component {
 
         console.log('submit:',this.state.selectFood, this.state.selectSymptoms)
         console.log(event.target.time.value)
-        const username = "test";
+        const inputDate = event.target.date.value.split("-");
+        const date = `${inputDate[1]}/${inputDate[2]}/${inputDate[0]} `
+        const symptom = this.state.selectSymptoms.toString();
 
         const newEntry = {
-            username: username,
-            data: "01/01/22",
+
+            date: date,
             time_of_day: event.target.time.value,
             food: this.state.selectFood,
-            symptom: this.state.selectSymptoms,
+            symptom: symptom,
             notes: event.target.notes.value
         }
 
         axios
-            .post(`http://localhost:8080/user/entry/${username}`, newEntry, {
-                headers:{
-                    Authorization: `Bearer ${sessionStorage.getItem('token')}`
-                }
-            })
+            .post(`http://localhost:8080/user/entry`, newEntry, header)
             .then((res)=>{
                 console.log(res)
+                event.target.reset();
             })
 
     }
@@ -69,39 +78,45 @@ class ProfilePage extends Component {
 
         const requestFood = axios.get(`http://localhost:8080/assets/food`);
         const requestSymptom = axios.get(`http://localhost:8080/assets/symptoms`);
+        const requestUserLog = axios.get(`http://localhost:8080/user/userLogs`, header );
 
         axios
-            .all ([requestFood, requestSymptom])
+            .all ([requestFood, requestSymptom, requestUserLog])
             .then((res)=>{
                 const foodArray = res[0].data;
                 const symptomArray = res[1].data;
+                const userLogArray = res[2].data;
 
                 this.setState({
-                    foodIcons: foodArray,
-                    symptomIcons: symptomArray,
+                    foodIcons: [...foodArray],
+                    symptomIcons: [...symptomArray],
+                    userLogs: [...userLogArray],
                 })
-
             })
-
     }
 
     render () {
         
-        if(this.state.foodIcons.length === 0 || this.state.symptomIcons.length === 0) {
+        if(this.state.foodIcons.length === 0 || this.state.symptomIcons.length === 0 || this.state.userLogs.length === 0) {
             return <p>Loading . . . </p>
         } else {
             return (
                 <div>
                     This is profile page
                     <CalendarComponent
-                    symptomIcons={this.state.symptomIcons}
+                    userLogArray={this.state.userLogs}
+                    foodIcons={this.state.foodIcons}
                     />
-                    <NewEntryForm
+                    {/* <NewEntryForm
                     handleSymptoms={this.handleSymptoms}
                     handleFood={this.handleFood}
                     handleSubmit={this.handleSubmit}
                     symptomIcons={this.state.symptomIcons}
                     foodIcons={this.state.foodIcons}
+                    /> */}
+                    <Summary
+                    foodIcons={this.state.foodIcons}
+                    userLogArray={this.state.userLogs}
                     />
                 </div>
             )

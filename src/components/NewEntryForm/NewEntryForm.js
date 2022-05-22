@@ -10,8 +10,10 @@ function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,fo
             <form
             onSubmit={handleSubmit}
             >
-                <label>today's date</label>
-                <label>What time did it happen?
+                <label className='form__label form__label--larger'>Date
+                    <input type='date' name='date'/>
+                </label>
+                <label className='form__label form__label--larger' >What time did it happen?
                     <input type='time' name='time'/>
                 </label>
                 <fieldset className='form__choice-container'>
@@ -56,7 +58,7 @@ function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,fo
                         ) 
                     })}
                 </fieldset>
-                <label className='form__label form__label--textarea'
+                <label className='form__label form__label--larger'
                 name="notes">
                     Additional notes
                     <input

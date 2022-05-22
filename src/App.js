@@ -74,7 +74,14 @@ class App extends Component {
             }}/>
 
             <Route path="/register" component={RegisterPage}/>
-            <Route path="/:username" component={ProfilePage}/> 
+            <Route path="/:username" render={(routerProps)=>{
+              return (
+                <ProfilePage
+                isLogin={this.state.isLogin}
+                {...routerProps}
+                />
+              )
+            }}/> 
           </Switch>
         </Router>
         
