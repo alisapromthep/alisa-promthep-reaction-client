@@ -26,11 +26,12 @@ function Summary({foodIcons, userLogArray}) {
     return (
         <div>
             {
-            groupLogArray.map((food)=>{
+            groupLogArray.map((food, index)=>{
                 const foodKey = Object.keys(food).toString()
                 const foodLog = food[foodKey]
                 const foodIcon = (foodIcons.find((icon)=> icon.name === foodKey))
                 return <SummaryDetail
+                key={index}
                 foodKey={foodKey}
                 foodLog={foodLog}
                 foodIcon={foodIcon}

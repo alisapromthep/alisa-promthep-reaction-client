@@ -11,9 +11,9 @@ function SummaryDetail({foodKey, foodLog, foodIcon }) {
             <p className='summary__img-name'>{foodIcon.name}</p>
             </div>
             <ul>
-                {foodLog.map((entry)=>{
+                {foodLog.map((entry, index)=>{
                     return (
-                        <li>
+                        <li key={index}>
                             {entry.date}: {entry.symptom}
                         </li>
                     )
