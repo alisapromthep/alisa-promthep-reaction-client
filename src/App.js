@@ -2,13 +2,11 @@ import { Component } from 'react';
 import './App.scss';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import axios from 'axios';
-import HomePage from './pages/HomePage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import { Redirect } from 'react-router-dom';
 
-export const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env;
 
 class App extends Component {
 
@@ -65,8 +63,7 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route path="/" exact component={HomePage}/>
-            <Route path="/login" render={(routerProps)=>{
+            <Route path="/" exact render={(routerProps)=>{
               return (
                 <LoginPage
                 handleLogin={this.handleLogin}
@@ -78,7 +75,7 @@ class App extends Component {
             }}/>
 
             <Route path="/register" component={RegisterPage}/>
-            <Route path="/:username" render={(routerProps)=>{
+            <Route path="/profile/:username" render={(routerProps)=>{
               return (
                 <ProfilePage
                 isLogin={this.state.isLogin}

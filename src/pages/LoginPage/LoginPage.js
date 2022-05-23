@@ -7,10 +7,11 @@ function LoginPage({handleLogin, isLogin, username}) {
 
         {
             if(isLogin){
-                return <Redirect to={`/${username}`} />
+                return <Redirect to={`/profile/${username}`} />
             } else {
                 return (
                     <div>
+                        <h1>Welcome to ReAction</h1>
                         Login
                         <LoginForm
                         handleLogin={handleLogin}
