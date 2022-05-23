@@ -1,9 +1,13 @@
 import React from 'react';
+import './CalendarEvent.scss';
 
-function CalendarEvent(props) {
+function CalendarEvent({food, foodIcons}) {
+
+    const foodInfo = foodIcons.find((icon)=>icon.name === food)
+
     return (
         <div>
-            event
+            <img className='calendar__img' src={foodInfo.img_file} alt={foodInfo.name}/>
         </div>
     );
 }

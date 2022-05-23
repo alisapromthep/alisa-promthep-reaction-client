@@ -1,25 +1,19 @@
 import React from 'react';
 import SummaryDetail from '../SummaryDetail/SummaryDetail';
+import {groupBy} from '../../util/groupBy';
 
 function Summary({foodIcons, userLogArray}) {
 
     //group the logs by the same food 
 
-    const groupByFood = userLogArray.reduce((cache, logs)=>{
-        const property = logs['food']
-        if (property in cache) {
-            return {...cache, [property]: cache[property].concat(logs)}
-        } else {
-            return {...cache, [property]:[logs]}
-        }
-    }, {});
+    const groupByFood = groupBy('food', userLogArray)
 
     //put each grouping into an array, for mapping later 
     let groupLogArray = [];
     for (const property in groupByFood) {
-        const foodKey = property
-        const foodLog = groupByFood[property]
-        const logDetail = {[foodKey]: foodLog}
+        const foodKey = property;
+        const foodLog = groupByFood[property];
+        const logDetail = {[foodKey]: foodLog};
         groupLogArray.push(logDetail);
     }
 

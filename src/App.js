@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     isLogin: false,
     isLoginError: false,
+    username: ''
   }
 
   handleChange = (event) => {
@@ -39,12 +40,14 @@ class App extends Component {
       .post(`http://localhost:8080/user/login`, login)
       .then((response)=>{
         console.log(response.data.token)
+        const username = response.data.username;
         const authToken = response.data.token
         sessionStorage.setItem('token', authToken)
 
         this.setState({
           isLogin: true,
           isLoginError: false,
+          username: username,
         })
       })
       .catch ((err)=>{
@@ -67,6 +70,7 @@ class App extends Component {
               return (
                 <LoginPage
                 handleLogin={this.handleLogin}
+                username={this.state.username}
                 isLogin={this.state.isLogin}
                 {...routerProps}
                 />

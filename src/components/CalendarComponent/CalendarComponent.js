@@ -7,17 +7,17 @@ import 'react-calendar/dist/Calendar.css';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
 
 function CalendarComponent({userLogArray, foodIcons}) {
+
     return (
         <div>
             <Calendar
             tileContent={ ({ date, view }) => {
-                // console.log('date', date.getDate())
-                // console.log('month',date.getMonth())
-                // console.log(date.getFullYear())
-                return view === 'month' && date.getDay() === 0 ? <CalendarEvent/>
-            : null} }/>
-
-            
+                return (userLogArray.map((log)=>{
+                    const timestamp = Date.parse(log.date);
+                    let inputDate = new Date(timestamp);
+                    return view === 'month' && date.toLocaleDateString() === inputDate.toLocaleDateString() ? <CalendarEvent food={log.food} foodIcons={foodIcons} /> : null}))
+                }
+            }/>
         </div>
     );
 }
