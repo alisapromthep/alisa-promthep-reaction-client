@@ -1,30 +1,38 @@
 import React from 'react';
+import './LoginForm.scss';
 
 function LoginForm({handleLogin}) {
 
 
     return (
-        <div>
-            <form
-            onSubmit={handleLogin}
-            >
-                <label name='username'>
-                    Username
-                    <input
-                    type='text'
-                    name='username'
-                    placeholder='username' />
-                </label>
-                <label name='password'>
-                    Password
-                    <input
-                    type='password'
-                    name='password'
-                    placeholder='password' />
-                </label>
-                <button type='submit'> Login </button>
-            </form>
-        </div>
+        <form
+        className='login__form'
+        onSubmit={handleLogin}
+        >
+            <label 
+            className='login__label'
+            name='username'>
+                Username
+                <input
+                className='login__input'
+                type='text'
+                name='username'
+                placeholder='Your username' />
+            </label>
+            <label 
+            className='login__label'
+            name='password'>
+                Password
+                <input
+                className='login__input'
+                type='password'
+                name='password'
+                placeholder='Your password' />
+            </label>
+            <button 
+            className='button'
+            type='submit'> Login </button>
+        </form>
     );
 }
 

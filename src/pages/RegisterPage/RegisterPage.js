@@ -3,6 +3,8 @@ import './RegisterPage.scss'
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import HeroImg from '../../components/HeroImg/HeroImg';
 
 class RegisterPage extends Component {
 
@@ -72,10 +74,14 @@ class RegisterPage extends Component {
         }
 
         return (
-            <div>
+            <div className='register'>
+                <HeroImg />
+                <main className='register__form-container'>
+                    <Header headerTitle='Register'/>
                 <RegisterForm
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit} />
+                </main>
             </div>
         );
     }

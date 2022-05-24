@@ -1,3 +1,5 @@
+@use '../../style/partials/mixins' as *;
+
 .form {
     &__choice {
         &-container {
@@ -7,8 +9,7 @@
         }
     }
     &__label {
-        display: flex;
-        flex-direction: column;
+        @include form-column;
         font-size: 0.8rem;
         width: 4rem;
         padding: 0.25rem;

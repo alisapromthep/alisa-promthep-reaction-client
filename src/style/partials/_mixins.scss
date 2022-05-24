@@ -1,0 +1,58 @@
+@use '../partials/colors' as *;
+
+@mixin tablet {
+    @media (min-width:48rem) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 80rem){
+        @content;
+    }
+}
+
+@mixin mobile-padding {
+    padding: 1rem;
+}
+
+@mixin tablet-padding {
+    padding: 2rem;
+}
+
+@mixin form-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin round-border{
+    border-radius: 0.8rem;
+}
+
+@mixin round-top {
+    border-radius: 2rem 2rem 0 0;
+}
+
+@mixin labelform {
+    color: $darkgreen;
+    font-weight: 700;
+    padding: 0.5rem 0;
+}
+
+@mixin inputfield {
+    border: none;
+    border-bottom: 1px solid $darkgreen;
+    color:$darkgreen;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+}

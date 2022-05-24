@@ -1,0 +1,9 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+.header {
+    &__title {
+        padding: 1rem 2rem;
+        color:$darkgreen;
+    }
+}

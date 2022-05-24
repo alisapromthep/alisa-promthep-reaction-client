@@ -1,11 +1,15 @@
 import React from 'react';
 import NewEntryForm from '../../components/NewEntryForm/NewEntryForm';
 
-function NewEntryPage(props) {
+function NewEntryPage({handleSymptoms, handleFood, handleSubmit, symptomIcons, foodIcons}) {
     return (
-        <div>
-            
-        </div>
+        <NewEntryForm
+        handleSymptoms={handleSymptoms}
+        handleFood={handleFood}
+        handleSubmit={handleSubmit}
+        symptomIcons={symptomIcons}
+        foodIcons={foodIcons}
+        />
     );
 }
 

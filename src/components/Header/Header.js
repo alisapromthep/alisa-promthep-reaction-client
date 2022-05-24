@@ -1,9 +1,10 @@
 import React from 'react';
+import './Header.scss';
 
-function Header(props) {
+function Header({headerTitle}) {
     return (
         <header>
-            
+            <h1 className='header__title'>{headerTitle}</h1>
         </header>
     );
 }

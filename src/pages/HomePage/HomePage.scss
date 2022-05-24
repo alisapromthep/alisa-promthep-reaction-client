@@ -1,0 +1,54 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+.home {
+    background-color: white;
+    &__hero {
+        width: 20rem;
+        padding: 2rem 0;
+    }
+    
+    &__container {
+        @include round-top;
+        background-color: $lightgreen;
+        height: 70vh;
+        @include flex-column;
+        align-items: center;
+    }
+
+    &__title {
+        padding: 2rem;
+        text-align: center;
+        font-size: 1.9rem;
+    }
+    &__description {
+        text-align: center;
+    }
+
+    &__link {
+        @include round-border;
+        text-decoration: none;
+        text-align: center;
+        color: $darkgrey;
+        padding: 1.2rem;
+        width: 100%;
+        height: 100%;
+        text-transform: capitalize;
+
+        &--active {
+            background-color: white;
+        }
+
+        &-container {
+            @include round-border;
+            width: 15rem;
+            height: 4rem;
+            background-color: rgba(240,240,240,0.5);
+            border: 0.8px solid white;
+            margin-top: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;          
+        }
+    }
+}

@@ -1,7 +1,21 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+
 .register {
+
+    &__form {
+        @include flex-column;
+        align-self: center;
+        width: 100%;
+        padding: 2rem;
+    }
     &__label {
-        display: flex;
-        flex-direction: column;
-        width: 10rem;
+        @include flex-column;
+        @include labelform;
+    }
+
+    &__input {
+        @include inputfield;
     }
 }

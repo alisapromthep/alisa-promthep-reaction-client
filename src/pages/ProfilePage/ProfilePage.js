@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import CalendarComponent from '../../components/CalendarComponent/CalendarComponent';
-import NewEntryForm from '../../components/NewEntryForm/NewEntryForm';
 import Summary from '../../components/Summary/Summary';
+import NewEntryPage from '../NewEntryPage/NewEntryPage';
 import axios from 'axios';
+import {NewtonsCradle} from '@uiball/loaders';
+import Header from '../../components/Header/Header';
 
 const header = {
     headers:{
@@ -98,22 +100,22 @@ class ProfilePage extends Component {
     render () {
         
         if(this.state.foodIcons.length === 0 || this.state.symptomIcons.length === 0 || this.state.userLogs.length === 0) {
-            return <p>Loading . . . </p>
+            return <NewtonsCradle size={40} speed={1.5} color="darkgreen"/>
         } else {
             return (
                 <div>
-                    This is profile page
+                    <Header headerTitle={`${this.props.match.params.username}'s Profile`}/>
                     <CalendarComponent
                     userLogArray={this.state.userLogs}
                     foodIcons={this.state.foodIcons}
                     />
-                    {/* <NewEntryForm
+                    <NewEntryPage
                     handleSymptoms={this.handleSymptoms}
                     handleFood={this.handleFood}
                     handleSubmit={this.handleSubmit}
                     symptomIcons={this.state.symptomIcons}
                     foodIcons={this.state.foodIcons}
-                    /> */}
+                    />
                     <Summary
                     foodIcons={this.state.foodIcons}
                     userLogArray={this.state.userLogs}

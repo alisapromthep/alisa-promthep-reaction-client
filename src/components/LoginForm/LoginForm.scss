@@ -1,0 +1,13 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+.login {
+    
+    &__label {
+        @include form-column;
+    }
+    
+    &__input {
+        @include inputfield;
+    }
+}
