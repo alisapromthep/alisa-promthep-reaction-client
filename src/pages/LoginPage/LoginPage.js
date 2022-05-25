@@ -14,7 +14,9 @@ function LoginPage({handleLogin, isLogin, username}) {
             } else {
                 return (
                     <div className='login'>
-                        <HeroImg />
+                        <div className='login__hero-container'>
+                            <HeroImg />
+                        </div>
                     <main className='login__form-container'>
                     <Header headerTitle='Log-in'/>
                         <LoginForm

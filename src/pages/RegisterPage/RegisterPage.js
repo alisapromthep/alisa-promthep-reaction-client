@@ -75,7 +75,9 @@ class RegisterPage extends Component {
 
         return (
             <div className='register'>
+                <div className='register__hero-container'>
                 <HeroImg />
+                </div>
                 <main className='register__form-container'>
                     <Header headerTitle='Register'/>
                 <RegisterForm

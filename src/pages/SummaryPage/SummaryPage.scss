@@ -1,0 +1,21 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+.summary {
+    &__container {
+        @include round-border;
+        @include flex-column;
+        @include mobile-padding;
+        background-color: white;
+        width: 100%;
+        align-items: flex-start;
+    };
+
+    &__detailbox {
+        @include tablet {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+}

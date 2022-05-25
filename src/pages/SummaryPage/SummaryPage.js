@@ -1,9 +1,11 @@
 import React from 'react';
-import SummaryDetail from '../SummaryDetail/SummaryDetail';
+import './SummaryPage.scss';
+import SummaryDetail from '../../components/SummaryDetail/SummaryDetail';
 import {groupBy} from '../../util/groupBy';
+import uniqid from 'uniqid';
+import Header from '../../components/Header/Header';
 
-function Summary({foodIcons, userLogArray}) {
-
+function Summary({handleDelete, foodIcons, userLogArray}) {
     //group the logs by the same food 
 
     const groupByFood = groupBy('food', userLogArray)
@@ -18,21 +20,25 @@ function Summary({foodIcons, userLogArray}) {
     }
 
     return (
-        <div>
+        <article className='summary__container'>
+            <Header headerTitle='Allergy log' />
+            <div className='summary__detailbox'>
             {
-            groupLogArray.map((food, index)=>{
+            groupLogArray.map((food)=>{
                 const foodKey = Object.keys(food).toString()
                 const foodLog = food[foodKey]
                 const foodIcon = (foodIcons.find((icon)=> icon.name === foodKey))
                 return <SummaryDetail
-                key={index}
+                key={uniqid()}
                 foodKey={foodKey}
                 foodLog={foodLog}
                 foodIcon={foodIcon}
+                handleDelete={handleDelete}
                 />
             })
             }
-        </div>
+            </div>
+        </article>
     );
 }
 

@@ -1,8 +1,11 @@
 import React from 'react';
 import NewEntryForm from '../../components/NewEntryForm/NewEntryForm';
+import Header from '../../components/Header/Header';
 
 function NewEntryPage({handleSymptoms, handleFood, handleSubmit, symptomIcons, foodIcons}) {
     return (
+        <>
+        <Header headerTitle='New Entry Form'/>
         <NewEntryForm
         handleSymptoms={handleSymptoms}
         handleFood={handleFood}
@@ -10,6 +13,7 @@ function NewEntryPage({handleSymptoms, handleFood, handleSubmit, symptomIcons, f
         symptomIcons={symptomIcons}
         foodIcons={foodIcons}
         />
+        </>
     );
 }
 

@@ -43,6 +43,10 @@
     border-radius: 2rem 2rem 0 0;
 }
 
+@mixin round-left {
+    border-radius: 2rem 0 0 2rem;
+}
+
 @mixin labelform {
     color: $darkgreen;
     font-weight: 700;
@@ -55,4 +59,9 @@
     color:$darkgreen;
     padding: 0.5rem 0;
     margin: 0.5rem 0;
+}
+
+@mixin button-reset {
+    border: none;
+    background-color: transparent;
 }

@@ -1,2 +1,45 @@
 @use '../../style/partials/mixins' as *;
 @use '../../style/partials/colors' as *;
+
+.profile {
+
+    margin-top: 2rem;
+
+    @include tablet {
+        margin: 0;
+    }
+
+    @include tablet {
+        display: flex;
+    }
+
+    &__loading {
+        display: flex;
+        @include flex-center;
+        height: 100vh;
+    }
+
+    &__form-container {
+        @include round-border;
+        background-color: $lightgrey;
+        margin: 2rem 0;
+
+    }
+
+    &__topcontainer {
+        @include desktop {
+            display: flex;
+            flex-direction: row-reverse
+        }
+    }
+
+    &__dashboard {
+        @include round-top;
+
+        @include tablet {
+            @include round-left;
+            background-color: white;
+            padding: 2rem;
+        }
+    }
+}

@@ -1,15 +1,49 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
 .summary {
+    @include round-border;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 0.5rem 0.25rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-color: white;
+
+    @include tablet {
+        width: 45%;
+    }
+
+    &__container {
+        background-color: $lightgreen;
+    }
+
+    @include tablet {
+        margin: 1rem 1rem;
+    }
+
+    &__list {
+        margin: 0;
+        padding-left: 1rem;
+    }
+
+    &__detail {
+        padding: 0.25rem 0;
+        font-size: 0.9rem;
+        list-style: none;
+        &--bold{
+            font-weight: 700;
+        }
+    }
 
     &__img {
         height: 3rem;
         object-fit: cover;
 
         &-name {
-            font-weight: 700;
+            @include labelform;
+            text-transform: capitalize;
             margin: 0;
             margin-top: 0.5rem;
         }
@@ -19,5 +53,10 @@
             flex-direction: column;
             align-items: center;
         }
+    }
+
+    &__delete {
+        border: none;
+        background-color: transparent;
     }
 }

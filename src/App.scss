@@ -6,10 +6,14 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+}
+
 .button {
   @include round-border;
   padding: 0.7rem;
-  background-color: $darkjunglegreen;
+  background-color: $orange;
   color: white;
   font-size: 1.2rem;
   font-weight: 700;
