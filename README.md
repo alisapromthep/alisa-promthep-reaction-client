@@ -1,70 +1,91 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## reAction (rxn)
 
-## Available Scripts
+reAction is a food allergy tracking web application that help user document what kind of food cause them to feel unwell.
+It is created to make the documenting process as quick and easy as possible, because who has the time to write every details! Thus, click click, done! It is also design to be easy to look back and see your past reactions. 
 
-In the project directory, you can run:
+## Features
+- Register and log-in to create personal profile 
+- Calendar visual with icons 
+- Summary section, groupped by food with dates and symptoms
+- View/ Add / Delete entry logs 
+- Fully responsive design for Mobile-Tablet-Desktop
 
-### `npm start`
+**Future features**
+- Allergy friendly restaurant suggestions search
+- Suggestions for  
+- More detailed summary upon calendar-click 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Client:** 
+HTML5,CSS3,SASS,Javascript,React,NodeJS
 
-### `npm test`
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,sass,react,nodejs,)](https://skillicons.dev)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Server:**
+NodeJS, Express, MySQL
+[![My Skills](https://skillicons.dev/icons?i=nodejs,express,mysql)](https://skillicons.dev)
+## Run Locally
 
-### `npm run build`
+Clone the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  git clone https://github.com/alisapromthep/alisa-promthep-reaction-client
+  git clone https://github.com/alisapromthep/alisa-promthep-reaction-server
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to the project directory
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+cd into client and cd into server folders, then install dependencies 
 
-### `npm run eject`
+Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In server side 
+You'll need to set up a database call : reaction.
+And then run migration and seed files to set up your database.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+  npx knex migrate:latest 
+  npx knex seed:run 
+```
+Start the server on the server side 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+  npm run dev 
+```
+Start the server on the client side 
 
-## Learn More
+```bash
+  npm run start
+```
+Now the app should be live! 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run this project, you will need to add the following environment variables to your .env file
 
-### Code Splitting
+Server Side 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+PORT: The port on your local machine where you want to run your server. You can always use 8080.
 
-### Analyzing the Bundle Size
+SECRET_KEY: A random string of characters, you can generate this by running the following code in your terminal:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+  node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
+```
 
-### Making a Progressive Web App
+DATEBASE_USERNAME & DATABASE_PASSWORD: Your mysql username and password. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Acknowledgements
 
-### Advanced Configuration
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - Amazing grahpic: http://www.freepik.com
+ - All icons from: https://www.flaticon.com/
+ - Thank you my BrainStation Instructors and TAs for guidances
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
