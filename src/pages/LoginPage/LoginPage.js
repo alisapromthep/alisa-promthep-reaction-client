@@ -8,6 +8,8 @@ import HeroImg from '../../components/HeroImg/HeroImg';
 
 function LoginPage({handleLogin, isLogin, username}) {
 
+    //when login, redirect to profile page
+
         {
             if(isLogin){
                 return <Redirect to={`/profile/${username}`} />
