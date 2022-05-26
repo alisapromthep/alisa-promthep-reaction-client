@@ -1,0 +1,21 @@
+@use '../../style/partials/mixins' as *;
+@use '../../style/partials/colors' as *;
+
+.footer {
+    @include flex-column;
+    @include flex-center;
+    padding: 1rem;
+    position: relative;
+    bottom: -10%;
+
+    &__icon {
+        color: #52796f;
+        font-size: 2rem;
+        margin: 0.5rem;
+    }
+
+    &__info {
+        color: #52796f;
+        font-size:1rem;
+    }
+}

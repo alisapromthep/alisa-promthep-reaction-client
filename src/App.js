@@ -7,10 +7,6 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 
-
-
-const API_URL = process.env;
-
 class App extends Component {
 
   state = {
@@ -19,11 +15,14 @@ class App extends Component {
     username: ''
   }
 
-  handleChange = (event) => {
+  handleLogout = (event)=>{
+    event.preventDefault();
+    sessionStorage.removeItem('token')
 
     this.setState({
-        [event.target.name]: event.target.value,
-    })
+      isLogin: false
+    }); 
+    
   }
 
   handleLogin = (event) => {
@@ -40,7 +39,7 @@ class App extends Component {
     axios
       .post(`http://localhost:8080/user/login`, login)
       .then((response)=>{
-        console.log(response.data.token)
+
         const username = response.data.username;
         const authToken = response.data.token
         sessionStorage.setItem('token', authToken)
@@ -54,8 +53,6 @@ class App extends Component {
       .catch ((err)=>{
         console.log(err.response.data.error)
       })
-
-
 
     event.target.reset();
   }
@@ -77,19 +74,18 @@ class App extends Component {
                 />
               )
             }}/>
-
             <Route path="/register" component={RegisterPage}/>
             <Route path="/profile/:username" render={(routerProps)=>{
               return (
                 <ProfilePage
                 isLogin={this.state.isLogin}
+                handleLogout={this.handleLogout}
                 {...routerProps}
                 />
               )
             }}/> 
           </Switch>
         </Router>
-        
       </div>
     );
   }
