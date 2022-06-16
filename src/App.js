@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.scss';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import axios from 'axios';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -12,7 +12,12 @@ class App extends Component {
   state = {
     isLogin: false,
     isLoginError: false,
-    username: ''
+    isRegister: false,
+    name: "",
+    username: "",
+    password: "",
+    phone: "",
+    email: "",
   }
 
   handleLogout = (event)=>{
@@ -23,6 +28,54 @@ class App extends Component {
       isLogin: false
     }); 
     
+  }
+
+  handleChange = (event) => {
+
+    this.setState({
+        [event.target.name]: event.target.value,
+    })
+}
+
+  isFormValid = ()=>{
+    //check if all fields are filled 
+    if (
+      !this.state.name ||
+      !this.state.username ||
+      !this.state.password ||
+      !this.state.phone ||
+      !this.state.email
+  ) {
+      return false;
+  } else {
+      return true 
+  }
+  }
+
+  handleRegister = (event)=> {
+    event.preventDefault();
+    if (!this.isFormValid()){
+      console.log('invalid form');
+      return;
+  } else {
+      axios
+          .post(`http://localhost:8080/user/register`, {
+              name: event.target.name.value,
+              username: event.target.username.value,
+              password: event.target.password.value,
+              phone: event.target.phone.value,
+              email: event.target.email.value
+          })
+          .then((response)=>{
+              console.log(`new user is added`);
+              this.setState({isRegister: true,
+              username: event.target.username.value});
+          })
+          .catch((err)=>{
+              console.log(`problem registering`);
+          })
+  }
+
   }
 
   handleLogin = (event) => {
@@ -59,35 +112,53 @@ class App extends Component {
 
   render (){
 
-    return (
-      <div>
-        <Router>
-          <Switch>
-            <Route path='/' exact component={HomePage}/>
-            <Route path="/login" render={(routerProps)=>{
-              return (
-                <LoginPage
-                handleLogin={this.handleLogin}
-                username={this.state.username}
-                isLogin={this.state.isLogin}
-                {...routerProps}
-                />
-              )
-            }}/>
-            <Route path="/register" component={RegisterPage}/>
-            <Route path="/profile/:username" render={(routerProps)=>{
-              return (
-                <ProfilePage
-                isLogin={this.state.isLogin}
-                handleLogout={this.handleLogout}
-                {...routerProps}
-                />
-              )
-            }}/> 
-          </Switch>
-        </Router>
-      </div>
-    );
+    if (this.state.isRegister) {
+      return <Redirect to={`/profile/${this.state.username}`} />;
+    } else {
+      return (
+        <div>
+          <Router>
+            <Switch>
+              <Route path='/' exact component={HomePage}/>
+              <Route path="/login" render={(routerProps)=>{
+                return (
+                  <LoginPage
+                  handleLogin={this.handleLogin}
+                  username={this.state.username}
+                  isLogin={this.state.isLogin}
+                  {...routerProps}
+                  />
+                )
+              }}/>
+              <Route path="/register" render={(routerProps)=>{
+                return (
+                  <RegisterPage 
+                  handleRegister={this.handleRegister}
+                  handleChange={this.handleChange}
+                  isRegister={this.state.isRegister}
+                  username={this.state.username}
+                  {...routerProps}
+                  />
+                )
+              }}
+              />
+  
+              <Route path="/profile/:username" render={(routerProps)=>{
+                return (
+                  <ProfilePage
+                  isLogin={this.state.isLogin}
+                  handleLogout={this.handleLogout}
+                  {...routerProps}
+                  />
+                )
+              }}/> 
+            </Switch>
+          </Router>
+        </div>
+      );
+
+    }
+
   }
 }
 
