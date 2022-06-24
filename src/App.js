@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.scss';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import axios from 'axios';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -67,9 +67,18 @@ class App extends Component {
               email: event.target.email.value
           })
           .then((response)=>{
-              console.log(`new user is added`);
-              this.setState({isRegister: true,
-              username: event.target.username.value});
+            const username = response.data.username;
+            const authToken = response.data.token;
+            console.log(username)
+            console.log(authToken)
+            sessionStorage.setItem('token', authToken);
+    
+            this.setState({
+              isLogin: true,
+              isLoginError: false,
+              username: username,
+            })
+
           })
           .catch((err)=>{
               console.log(`problem registering`);
@@ -111,10 +120,6 @@ class App extends Component {
   }
 
   render (){
-
-    if (this.state.isRegister) {
-      return <Redirect to={`/profile/${this.state.username}`} />;
-    } else {
       return (
         <div>
           <Router>
@@ -137,6 +142,7 @@ class App extends Component {
                   handleChange={this.handleChange}
                   isRegister={this.state.isRegister}
                   username={this.state.username}
+                  isLogin={this.state.isLogin}
                   {...routerProps}
                   />
                 )
@@ -156,9 +162,6 @@ class App extends Component {
           </Router>
         </div>
       );
-
-    }
-
   }
 }
 
