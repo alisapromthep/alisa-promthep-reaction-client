@@ -69,8 +69,6 @@ class App extends Component {
           .then((response)=>{
             const username = response.data.username;
             const authToken = response.data.token;
-            console.log(username)
-            console.log(authToken)
             sessionStorage.setItem('token', authToken);
     
             this.setState({
