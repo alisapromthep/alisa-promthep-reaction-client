@@ -148,9 +148,13 @@ class ProfilePage extends Component {
         axios
             .all ([requestFood, requestSymptom, requestUserLog])
             .then((res)=>{
+                console.log(res)
                 const foodArray = res[0].data;
                 const symptomArray = res[1].data;
                 const userLogArray = res[2].data;
+
+                console.log(foodArray);
+                console.log(symptomArray);
 
                 this.setState({
                     foodIcons: [...foodArray],
