@@ -4,6 +4,16 @@ import './NewEntryForm.scss';
 
 function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,foodIcons}) {
 
+    const today = new Date();
+    const dd = today.getDate() < 10 ? `0${today.getDate()}`:`${today.getDate()}`
+    const mm = (today.getMonth()+1) < 10 ? `0${(today.getMonth()+1)}`:`${today.getMonth()+1}`
+    const yyyy = today.getFullYear();
+
+    const todayDate = `${yyyy}-${mm}-${dd}`;
+    
+    const hours = today.getHours() < 10 ? `0${today.getHours()}`:today.getHours();
+    const minutes = today.getMinutes()<10 ? `0${today.getMinutes()}`:today.getMinutes();
+    const timeNow = `${hours}:${minutes}`
 
     return (
         <form
@@ -15,13 +25,17 @@ function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,fo
                     <input
                     required
                     className='form__input'
-                    type='date' name='date'/>
+                    type='date'
+                    value={todayDate}
+                    name='date'/>
                 </label>
                 <label className='form__label form__label--larger' >What time did it happen?
                     <input
                     required
                     className='form__input'
-                    type='time' name='time'/>
+                    type='time' 
+                    value={timeNow}
+                    name='time'/>
                 </label>
             </div>
             <div className='form__bottomcontainer'>
