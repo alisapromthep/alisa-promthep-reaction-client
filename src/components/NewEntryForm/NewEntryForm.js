@@ -2,18 +2,7 @@ import React from 'react';
 import './NewEntryForm.scss';
 
 
-function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,foodIcons}) {
-
-    const today = new Date();
-    const dd = today.getDate() < 10 ? `0${today.getDate()}`:`${today.getDate()}`
-    const mm = (today.getMonth()+1) < 10 ? `0${(today.getMonth()+1)}`:`${today.getMonth()+1}`
-    const yyyy = today.getFullYear();
-
-    const todayDate = `${yyyy}-${mm}-${dd}`;
-    
-    const hours = today.getHours() < 10 ? `0${today.getHours()}`:today.getHours();
-    const minutes = today.getMinutes()<10 ? `0${today.getMinutes()}`:today.getMinutes();
-    const timeNow = `${hours}:${minutes}`
+function NewEntryForm ({handleSymptoms, handleSubmit, handleChange,symptomIcons,foodIcons, date,time}) {
 
     return (
         <form
@@ -26,16 +15,20 @@ function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,fo
                     required
                     className='form__input'
                     type='date'
-                    value={todayDate}
-                    name='date'/>
+                    value={date}
+                    name='date'
+                    onChange={handleChange}
+                    />
                 </label>
                 <label className='form__label form__label--larger' >What time did it happen?
                     <input
                     required
                     className='form__input'
                     type='time' 
-                    value={timeNow}
-                    name='time'/>
+                    value={time}
+                    name='time'
+                    onChange={handleChange}
+                    />
                 </label>
             </div>
             <div className='form__bottomcontainer'>
@@ -74,9 +67,9 @@ function NewEntryForm ({handleSymptoms, handleFood, handleSubmit,symptomIcons,fo
                                 {food.name}
                                 <input 
                                 type='radio'
-                                name={food}
+                                name='selectFood'
                                 value={food.name}
-                                onChange={handleFood}
+                                onChange={handleChange}
                                 />
                             </label>
                             ) 

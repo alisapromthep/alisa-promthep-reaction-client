@@ -12,7 +12,6 @@
 
     @include desktop {
         width: 40rem;
-        height: fit-content;
         padding: 1rem;
         margin: 0 1rem;
     }
@@ -38,7 +37,6 @@
 }
 .react-calendar button {
     margin: 0;
-    border: none;
     outline: none;
 }
 .react-calendar button:enabled:hover {
@@ -47,6 +45,7 @@ cursor: pointer;
 .react-calendar__navigation {
     display: flex;
     height: 44px;
+
 }
 .react-calendar__navigation button {
     min-width: 44px;
@@ -55,6 +54,11 @@ cursor: pointer;
     font-family: Nunito Sans;
     color: $darkjunglegreen;
     background: none;
+    border: none;
+
+    @include tablet {
+        font-size: 1.2rem;
+    }
 }
 .react-calendar__navigation button:disabled {
     background-color: #f0f0f0;
@@ -68,6 +72,10 @@ cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 0.75em;
+
+    @include tablet{
+        font-size: 1.2rem;
+    }
 }
 .react-calendar__month-view__weekdays__weekday {
     padding: 0.5em;
@@ -78,6 +86,7 @@ cursor: pointer;
     justify-content: center;
     font-size: 0.75em;
     font-weight: bold;
+
 }
 .react-calendar__month-view__days__day--weekend {
     color: $orange;
@@ -91,15 +100,23 @@ cursor: pointer;
     padding: 2em 0.5em;
 }
 .react-calendar__tile {
-    @include round-border;
     display: flex;
     min-width: 2.5rem;
     min-height: 3rem;
-    max-height: 3rem;
+    height: 3rem;
     padding: 0.2rem;
     background: none;
     text-align: center;
     line-height: 16px;
+    border-color:  $lightgreen;
+    border-style: dotted;
+    border-radius: 0.5rem;
+
+    @include tablet{
+        height: 6rem;
+        font-size: 1.2rem;
+    }
+
     
 }
 .react-calendar__tile:disabled {

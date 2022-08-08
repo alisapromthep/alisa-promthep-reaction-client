@@ -11,13 +11,27 @@ import { Redirect } from 'react-router-dom';
 
 
 class ProfilePage extends Component {
+
+    //today's date and time as default value for form 
+    today = new Date();
+    dd = this.today.getDate() < 10 ? `0${this.today.getDate()}`:`${this.today.getDate()}`
+    mm = (this.today.getMonth()+1) < 10 ? `0${(this.today.getMonth()+1)}`:`${this.today.getMonth()+1}`
+    yyyy = this.today.getFullYear();
+
+    todayDate = `${this.yyyy}-${this.mm}-${this.dd}`;
+    
+    hours = this.today.getHours() < 10 ? `0${this.today.getHours()}`:this.today.getHours();
+    minutes = this.today.getMinutes()<10 ? `0${this.today.getMinutes()}`:this.today.getMinutes();
+    timeNow = `${this.hours}:${this.minutes}`
     
     state = {
         foodIcons: [],
         symptomIcons: [],
-        selectSymptoms: [],
         userLogs: [],
+        selectSymptoms: [],
         selectFood: "",
+        date: this.todayDate,
+        time:this.timeNow,
     }
 
     //header for axios requests
@@ -27,10 +41,6 @@ class ProfilePage extends Component {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     };
-
-    //get token to verify user is log in before rendering 
-
-    loginToken = sessionStorage.getItem('token');
 
     //create reference to implement scroll to button (for NavBar)
 
@@ -52,7 +62,7 @@ class ProfilePage extends Component {
         this.newEntry.current.scrollIntoView();
     }
 
-    // forms handller 
+    // forms handler 
 
     //handle symptoms selection 
 
@@ -69,14 +79,12 @@ class ProfilePage extends Component {
         }
     }
 
-    //handle food selection 
-
-    handleFood = (event)=>{
-
-        const food = event.target.value
-
-        this.setState({selectFood: food})
-
+    //handle form input change 
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        })
+        
     }
 
     //handle form submission 
@@ -84,14 +92,14 @@ class ProfilePage extends Component {
     handleSubmit = (event)=>{
         event.preventDefault();
 
-        const inputDate = event.target.date.value.split("-");
+        const inputDate = this.state.date.split("-");
         const date = `${inputDate[1]}/${inputDate[2]}/${inputDate[0]} `
         const symptom = this.state.selectSymptoms.toString();
 
         const newEntry = {
 
             date: date,
-            time_of_day: event.target.time.value,
+            time_of_day: this.state.time,
             food: this.state.selectFood,
             symptom: symptom,
             notes: event.target.notes.value
@@ -136,10 +144,14 @@ class ProfilePage extends Component {
                 console.log('error finding the user log and deleting')
             })
     }
+    
+    //get token to verify user is log in before rendering 
+    loginToken = sessionStorage.getItem('token');
 
     //first render 
 
     componentDidMount() {
+
 
         const requestFood = axios.get(`http://localhost:8080/assets/food`);
         const requestSymptom = axios.get(`http://localhost:8080/assets/symptoms`);
@@ -205,10 +217,12 @@ class ProfilePage extends Component {
                             className='profile__form-container'>
                             <NewEntryPage
                             handleSymptoms={this.handleSymptoms}
-                            handleFood={this.handleFood}
                             handleSubmit={this.handleSubmit}
+                            handleChange={this.handleChange}
                             symptomIcons={this.state.symptomIcons}
                             foodIcons={this.state.foodIcons}
+                            date={this.state.date}
+                            time={this.state.time}
                             />
                             </article>
                         </main>

@@ -22,14 +22,22 @@
     &__form-container {
         @include round-border;
         background-color: $lightgrey;
-        margin: 2rem 0;
+        margin: 2rem;
+
+        @include desktop {
+            margin: 2rem 0;
+        }
 
     }
 
     &__topcontainer {
+        margin: 2rem;
+
         @include desktop {
             display: flex;
-            flex-direction: row-reverse
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            margin: 0;
         }
     }
 

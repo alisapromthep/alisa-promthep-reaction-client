@@ -2,16 +2,19 @@ import React from 'react';
 import NewEntryForm from '../../components/NewEntryForm/NewEntryForm';
 import Header from '../../components/Header/Header';
 
-function NewEntryPage({handleSymptoms, handleFood, handleSubmit, symptomIcons, foodIcons}) {
+function NewEntryPage({handleSymptoms, handleSubmit, handleChange, symptomIcons, foodIcons, date, time}) {
+
     return (
         <>
         <Header headerTitle='New Entry Form'/>
         <NewEntryForm
         handleSymptoms={handleSymptoms}
-        handleFood={handleFood}
         handleSubmit={handleSubmit}
+        handleChange={handleChange}
         symptomIcons={symptomIcons}
         foodIcons={foodIcons}
+        date={date}
+        time={time}
         />
         </>
     );
