@@ -30,6 +30,9 @@
         &--bold{
             font-weight: 700;
         }
+        &--noinfo{
+            display:none;
+        }
     }
 
     &__img {

@@ -18,15 +18,16 @@ function SummaryDetail({foodLog, foodIcon, handleDelete}) {
                     return (
                         <li 
                         className='summary__detail'
-                        key={uniqid()}> <p className='summary__text'>
+                        key={uniqid()}>
+                            <p className='summary__text'>
                             <span className='summary__detail--bold'>{inputDate.toLocaleDateString()}</span>: {entry.symptom}</p>
-                            <p><span className='summary__detail--bold'>Note</span> {entry.notes}
+                            <p className={`${entry.notes ? '': 'summary__detail--noinfo'}`}><span className='summary__detail--bold'>Note</span> {entry.notes}
+                            </p>
                             <button className='summary__delete'
                             onClick={handleDelete}
                             >
                                 <RiDeleteBin5Line id={entry.id} className='summary__delete-img'/>
                             </button>
-                        </p>
                         </li>
                     )
                 })}
