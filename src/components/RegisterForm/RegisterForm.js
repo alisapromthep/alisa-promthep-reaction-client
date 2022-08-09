@@ -1,13 +1,13 @@
 import React from 'react';
 import './RegisterForm.scss';
 
-function SignupForm({handleChange, handleSubmit}) {
+function SignupForm({handleChange, handleRegister}) {
 
 
     return (
         <form
         className='register__form'
-        onSubmit={handleSubmit}>
+        onSubmit={handleRegister}>
             <label
             className='register__label' 
             name='name'>

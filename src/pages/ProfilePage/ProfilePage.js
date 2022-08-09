@@ -84,7 +84,6 @@ class ProfilePage extends Component {
         this.setState({
             [event.target.name]: event.target.value,
         })
-        
     }
 
     //handle form submission 
@@ -106,10 +105,10 @@ class ProfilePage extends Component {
         }
 
         axios
-            .post(`http://localhost:8080/user/entry`, newEntry, this.header)
+            .post(`${process.env.REACT_APP_API_URL}/user/entry`, newEntry, this.header)
             .then((res)=>{
                 event.target.reset();
-                return axios.get(`http://localhost:8080/user/userLogs`, this.header )
+                return axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header )
             })
             .then((res)=>{
                 this.setState({
@@ -130,9 +129,9 @@ class ProfilePage extends Component {
         const logId = event.target.id;
 
         axios
-            .delete(`http://localhost:8080/user/delete/${logId}`,this.header)
+            .delete(`${process.env.REACT_APP_API_URL}/user/delete/${logId}`,this.header)
             .then((res=>{
-                return axios.get(`http://localhost:8080/user/userLogs`, this.header )
+                return axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header )
             }))
             .then((res)=>{
                 this.setState({
@@ -153,9 +152,9 @@ class ProfilePage extends Component {
     componentDidMount() {
 
 
-        const requestFood = axios.get(`http://localhost:8080/assets/food`);
-        const requestSymptom = axios.get(`http://localhost:8080/assets/symptoms`);
-        const requestUserLog = axios.get(`http://localhost:8080/user/userLogs`, this.header );
+        const requestFood = axios.get(`${process.env.REACT_APP_API_URL}/assets/food`);
+        const requestSymptom = axios.get(`${process.env.REACT_APP_API_URL}/assets/symptoms`);
+        const requestUserLog = axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header );
 
         axios
             .all ([requestFood, requestSymptom, requestUserLog])

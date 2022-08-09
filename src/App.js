@@ -12,8 +12,69 @@ class App extends Component {
   state = {
     isLogin: false,
     isLoginError: false,
-    username: ''
+    name: "",
+    username: "",
+    password: "",
+    phone: "",
+    email: "",
+    isRegister: false,
   }
+
+  handleChange = (event)=>{
+    this.setState({
+      [event.target.name]:event.target.value,
+    })
+  }
+
+  //handling register/ form validity 
+  isFormValid = ()=>{
+
+    //check if fields are filled 
+    if (
+        !this.state.name ||
+        !this.state.username ||
+        !this.state.password ||
+        !this.state.phone ||
+        !this.state.email
+    ) {
+        return false;
+    } else {
+        return true 
+    }
+  }
+
+  handleRegister = (event)=>{
+    event.preventDefault();
+
+    if (!this.isFormValid()){
+        console.log('invalid form');
+        return;
+    } else {
+        axios
+            .post(`${process.env.REACT_APP_API_URL}/user/register`, {
+                name: this.state.name,
+                username: this.state.username,
+                password: this.state.password,
+                phone: this.state.phone,
+                email: this.state.email
+            })
+            .then((response)=>{
+                console.log(response);
+                console.log(`new user is added`);
+                sessionStorage.setItem('token', response.data.token)
+                this.setState({
+                  isRegister: true,
+                  username:response.data.username,
+                  isLogin: true
+                });
+            })
+            .catch((err)=>{
+                console.log(`problem registering`);
+            })
+    }
+
+}
+
 
   handleLogout = (event)=>{
     event.preventDefault();
@@ -37,7 +98,7 @@ class App extends Component {
     }
 
     axios
-      .post(`http://localhost:8080/user/login`, login)
+      .post(`${process.env.REACT_APP_API_URL}/user/login`, login)
       .then((response)=>{
 
         const username = response.data.username;
@@ -51,7 +112,7 @@ class App extends Component {
         })
       })
       .catch ((err)=>{
-        console.log(err.response.data.error)
+        console.log(err)
       })
 
     event.target.reset();
@@ -64,7 +125,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route path='/' exact component={HomePage}/>
-            <Route path="/login" render={(routerProps)=>{
+            <Route path='/login' render={(routerProps)=>{
               return (
                 <LoginPage
                 handleLogin={this.handleLogin}
@@ -74,8 +135,19 @@ class App extends Component {
                 />
               )
             }}/>
-            <Route path="/register" component={RegisterPage}/>
-            <Route path="/profile/:username" render={(routerProps)=>{
+            <Route path='/register' render = {
+              (rounterProps)=>{
+                return (
+                  <RegisterPage
+                  isRegister={this.state.isRegister}
+                  handleChange={this.handleChange}
+                  handleRegister={this.handleRegister}
+                  username={this.state.username}
+                  />
+                )
+              }
+            }/>
+            <Route path='/profile/:username' render={(routerProps)=>{
               return (
                 <ProfilePage
                 isLogin={this.state.isLogin}

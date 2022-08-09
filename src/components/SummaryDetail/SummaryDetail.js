@@ -5,7 +5,6 @@ import {RiDeleteBin5Line} from 'react-icons/ri';
 
 function SummaryDetail({foodLog, foodIcon, handleDelete}) {
 
-
     return (
         <article className='summary'>
             <div className='summary__img-container'>
@@ -20,7 +19,8 @@ function SummaryDetail({foodLog, foodIcon, handleDelete}) {
                         <li 
                         className='summary__detail'
                         key={uniqid()}> <p className='summary__text'>
-                            <span className='summary__detail--bold'>{inputDate.toLocaleDateString()}</span>: {entry.symptom}
+                            <span className='summary__detail--bold'>{inputDate.toLocaleDateString()}</span>: {entry.symptom}</p>
+                            <p><span className='summary__detail--bold'>Note</span> {entry.notes}
                             <button className='summary__delete'
                             onClick={handleDelete}
                             >
