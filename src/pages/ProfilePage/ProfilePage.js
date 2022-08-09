@@ -68,14 +68,18 @@ class ProfilePage extends Component {
 
     handleSymptoms = (event)=>{
 
+        console.log(event)
+
         const check = event.target.checked
         const selectSymptom = event.target.value
+        console.log('check',check)
+        console.log(selectSymptom)
         //check if the checked is true or false, to avoid double when uncheck
 
         if(check){
-            this.setState({selectSymptoms: [...this.state.selectSymptoms, selectSymptom]})
+            this.setState({selectSymptoms: [...this.state.selectSymptoms, selectSymptom]},()=>{console.log(this.state.selectSymptoms)})
         } else {
-            this.setState({selectSymptom: this.state.selectSymptoms.pop(selectSymptom)})
+            this.setState({selectSymptom: this.state.selectSymptoms.pop(selectSymptom)},()=>{console.log(this.state.selectSymptoms)})
         }
     }
 
@@ -104,6 +108,8 @@ class ProfilePage extends Component {
             notes: event.target.notes.value
         }
 
+        console.log('stored', symptom)
+
         axios
             .post(`${process.env.REACT_APP_API_URL}/user/entry`, newEntry, this.header)
             .then((res)=>{
@@ -112,7 +118,10 @@ class ProfilePage extends Component {
             })
             .then((res)=>{
                 this.setState({
-                    userLogs: [...res.data]
+                    userLogs: [...res.data],
+                    selectSymptoms:[],
+                    date: this.todayDate,
+                    time:this.timeNow
                 })
                 window.scrollTo(0,0)
             })

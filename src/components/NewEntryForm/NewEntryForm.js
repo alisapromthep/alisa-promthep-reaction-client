@@ -48,7 +48,7 @@ function NewEntryForm ({handleSymptoms, handleSubmit, handleChange,symptomIcons,
                                 <input 
                                 type='checkbox'
                                 value={symptom.name}
-                                onChange={handleSymptoms}
+                                onClick={handleSymptoms}
                                 />
                             </label>
                             ) 
