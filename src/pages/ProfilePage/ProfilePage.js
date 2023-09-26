@@ -9,20 +9,23 @@ import axios from 'axios';
 import {NewtonsCradle} from '@uiball/loaders';
 import { Redirect } from 'react-router-dom';
 
+//test
 
 const ProfilePage = () => {
 
-    //today's date and time as default value for form 
-    today = new Date();
-    dd = this.today.getDate() < 10 ? `0${this.today.getDate()}`:`${this.today.getDate()}`
-    mm = (this.today.getMonth()+1) < 10 ? `0${(this.today.getMonth()+1)}`:`${this.today.getMonth()+1}`
-    yyyy = this.today.getFullYear();
+    const []
 
-    todayDate = `${this.yyyy}-${this.mm}-${this.dd}`;
+    //today's date and time as default value for form 
+    const today = new Date();
+    const dd = this.today.getDate() < 10 ? `0${this.today.getDate()}`:`${this.today.getDate()}`
+    const mm = (this.today.getMonth()+1) < 10 ? `0${(this.today.getMonth()+1)}`:`${this.today.getMonth()+1}`
+    const yyyy = this.today.getFullYear();
+
+    todayDate = `${yyyy}-${mm}-${dd}`;
     
-    hours = this.today.getHours() < 10 ? `0${this.today.getHours()}`:this.today.getHours();
-    minutes = this.today.getMinutes()<10 ? `0${this.today.getMinutes()}`:this.today.getMinutes();
-    timeNow = `${this.hours}:${this.minutes}`
+    hours = today.getHours() < 10 ? `0${today.getHours()}`:today.getHours();
+    minutes = today.getMinutes()<10 ? `0${today.getMinutes()}`:today.getMinutes();
+    timeNow = `${hours}:${minutes}`
     
     state = {
         foodIcons: [],
