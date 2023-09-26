@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import './ProfilePage.scss';
 import CalendarComponent from '../../components/CalendarComponent/CalendarComponent';
 import SummaryPage from '../SummaryPage/SummaryPage';
@@ -10,7 +10,7 @@ import {NewtonsCradle} from '@uiball/loaders';
 import { Redirect } from 'react-router-dom';
 
 
-class ProfilePage extends Component {
+const ProfilePage = () => {
 
     //today's date and time as default value for form 
     today = new Date();
@@ -183,7 +183,7 @@ class ProfilePage extends Component {
             })
     }
 
-    render () {
+
         //when log out, redirect to homepage 
         if(!this.props.isLogin){
             return <Redirect to="/"/>;
@@ -238,7 +238,6 @@ class ProfilePage extends Component {
                 )
             }
         }
-    }
 }
 
 export default ProfilePage;
