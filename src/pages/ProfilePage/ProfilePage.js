@@ -9,37 +9,31 @@ import axios from 'axios';
 import {NewtonsCradle} from '@uiball/loaders';
 import { Redirect } from 'react-router-dom';
 
-//test
-
 const ProfilePage = () => {
-
-    const []
 
     //today's date and time as default value for form 
     const today = new Date();
-    const dd = this.today.getDate() < 10 ? `0${this.today.getDate()}`:`${this.today.getDate()}`
-    const mm = (this.today.getMonth()+1) < 10 ? `0${(this.today.getMonth()+1)}`:`${this.today.getMonth()+1}`
-    const yyyy = this.today.getFullYear();
+    const dd = today.getDate() < 10 ? `0${today.getDate()}`:`${today.getDate()}`
+    const mm = (today.getMonth()+1) < 10 ? `0${(today.getMonth()+1)}`:`${today.getMonth()+1}`
+    const yyyy = today.getFullYear();
 
     todayDate = `${yyyy}-${mm}-${dd}`;
     
     hours = today.getHours() < 10 ? `0${today.getHours()}`:today.getHours();
     minutes = today.getMinutes()<10 ? `0${today.getMinutes()}`:today.getMinutes();
     timeNow = `${hours}:${minutes}`
-    
-    state = {
-        foodIcons: [],
-        symptomIcons: [],
-        userLogs: [],
-        selectSymptoms: [],
-        selectFood: "",
-        date: this.todayDate,
-        time:this.timeNow,
-    }
+
+    const [foodIcons, setFoodIcons] = useState([]);
+    const [symptomIcons, setSymptomIcons] = useState([]);
+    const [userLogs, setUserLogs] = useState([]);
+    const [selectSymptoms, setSelectSymptoms] = useState([]);
+    const [selectFood, setSelectFood] = useState([]);
+    const [date, setDate] = useState(todayDate);
+    const [time, setTime] = useState(timeNow);
 
     //header for axios requests
 
-    header = {
+    const header = {
         headers:{
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
@@ -47,47 +41,57 @@ const ProfilePage = () => {
 
     //create reference to implement scroll to button (for NavBar)
 
-    newEntry = React.createRef();
+    const newEntry = React.createRef();
 
     //NavBar scroll functions 
 
-    scrollToNew = (event)=>{
+    const scrollToNew = (event)=>{
         event.preventDefault();
-        this.newEntry.current.scrollIntoView();
+        newEntry.current.scrollIntoView();
     }
 
-    scrollToCal = (event)=>{
+    const scrollToCal = (event)=>{
         event.preventDefault();
         window.scrollTo(0,0);
     }
 
-    handleCalendarClick = (event)=>{
-        this.newEntry.current.scrollIntoView();
+    const handleCalendarClick = (event)=>{
+        newEntry.current.scrollIntoView();
     }
 
     // forms handler 
 
     //handle symptoms selection 
 
-    handleSymptoms = (event)=>{
+    const handleSymptoms = (event)=>{
 
         console.log(event)
 
         const check = event.target.checked
-        const selectSymptom = event.target.value
+        const newSelectSymptom = event.target.value
         console.log('check',check)
-        console.log(selectSymptom)
+        console.log(newSelectSymptom)
         //check if the checked is true or false, to avoid double when uncheck
 
         if(check){
-            this.setState({selectSymptoms: [...this.state.selectSymptoms, selectSymptom]},()=>{console.log(this.state.selectSymptoms)})
+            setSelectSymptoms((prev)=> {
+            return(
+                [...prev,
+                    newSelectSymptom
+                ]
+            )});
+
         } else {
-            this.setState({selectSymptom: this.state.selectSymptoms.pop(selectSymptom)},()=>{console.log(this.state.selectSymptoms)})
+            setSelectSymptoms((prev)=>{ 
+            return (
+                prev.pop(newSelectSymptom)
+            )});
         }
     }
 
     //handle form input change 
-    handleChange = (event) => {
+    const handleChange = (event) => {
+
         this.setState({
             [event.target.name]: event.target.value,
         })
@@ -95,18 +99,18 @@ const ProfilePage = () => {
 
     //handle form submission 
 
-    handleSubmit = (event)=>{
+    const handleSubmit = (event)=>{
         event.preventDefault();
 
-        const inputDate = this.state.date.split("-");
+        const inputDate = date.split("-");
         const date = `${inputDate[1]}/${inputDate[2]}/${inputDate[0]} `
-        const symptom = this.state.selectSymptoms.toString();
+        const symptom = selectSymptoms.toString();
 
         const newEntry = {
 
             date: date,
-            time_of_day: this.state.time,
-            food: this.state.selectFood,
+            time_of_day: time,
+            food: selectFood,
             symptom: symptom,
             notes: event.target.notes.value
         }
@@ -114,18 +118,16 @@ const ProfilePage = () => {
         console.log('stored', symptom)
 
         axios
-            .post(`${process.env.REACT_APP_API_URL}/user/entry`, newEntry, this.header)
+            .post(`${process.env.REACT_APP_API_URL}/user/entry`, newEntry, header)
             .then((res)=>{
                 event.target.reset();
-                return axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header )
+                return axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, header )
             })
             .then((res)=>{
-                this.setState({
-                    userLogs: [...res.data],
-                    selectSymptoms:[],
-                    date: this.todayDate,
-                    time:this.timeNow
-                })
+                setUserLogs([...res.data]);
+                setSelectSymptoms([]);
+                setDate(todayDate);
+                setTime(timeNow);
                 window.scrollTo(0,0)
             })
             .catch((err)=>{
@@ -136,7 +138,7 @@ const ProfilePage = () => {
 
     //handle delete post 
 
-    handleDelete = (event)=>{
+    const handleDelete = (event)=>{
         event.preventDefault();
         const logId = event.target.id;
 
@@ -146,9 +148,7 @@ const ProfilePage = () => {
                 return axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header )
             }))
             .then((res)=>{
-                this.setState({
-                    userLogs: [...res.data]
-                })
+                setUserLogs([...res.data]);
             })
             .catch((err)=>{
                 console.log(err)
@@ -157,16 +157,15 @@ const ProfilePage = () => {
     }
     
     //get token to verify user is log in before rendering 
-    loginToken = sessionStorage.getItem('token');
+    const loginToken = sessionStorage.getItem('token');
 
     //first render 
 
-    componentDidMount() {
-
+    useEffect(()=>{
 
         const requestFood = axios.get(`${process.env.REACT_APP_API_URL}/assets/food`);
         const requestSymptom = axios.get(`${process.env.REACT_APP_API_URL}/assets/symptoms`);
-        const requestUserLog = axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, this.header );
+        const requestUserLog = axios.get(`${process.env.REACT_APP_API_URL}/user/userLogs`, header );
 
         axios
             .all ([requestFood, requestSymptom, requestUserLog])
@@ -174,6 +173,10 @@ const ProfilePage = () => {
                 const foodArray = res[0].data;
                 const symptomArray = res[1].data;
                 const userLogArray = res[2].data;
+
+                setFoodIcons([...foodArray]);
+                setSymptomIcons([...symptomArray]);
+                setUserLogs([...userLogArray]);
 
                 this.setState({
                     foodIcons: [...foodArray],
@@ -184,7 +187,8 @@ const ProfilePage = () => {
             .catch((err)=>{
                 console.log(err)
             })
-    }
+
+    },[])
 
 
         //when log out, redirect to homepage 

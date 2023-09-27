@@ -6,15 +6,15 @@ import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
 
-    const [mouseOnRegister, SetMouseOnRegister] = useState(false);
+    const [mouseOnRegister, setMouseOnRegister] = useState(false);
 
     //toggle button between register and login 
     handleMouseEnter = (event)=>{
-        SetMouseOnRegister(true)
+        setMouseOnRegister(true)
     }
 
     handleMouseLeave = (event)=>{
-        SetMouseOnRegister(false)
+        setMouseOnRegister(false)
     }
 
         return (
