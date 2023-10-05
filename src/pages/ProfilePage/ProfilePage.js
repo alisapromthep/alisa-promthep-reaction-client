@@ -208,9 +208,9 @@ const ProfilePage = () => {
                 return (
                     <div className='profile'> 
                         <NavBar
-                        scrollToCal={this.scrollToCal}
-                        scrollToNew={this.scrollToNew}
-                        handleLogout={this.props.handleLogout}
+                        scrollToCal={scrollToCal}
+                        scrollToNew={scrollToNew}
+                        handleLogout={handleLogout}
                         />
                         <main className='profile__dashboard'>
                             <Header 

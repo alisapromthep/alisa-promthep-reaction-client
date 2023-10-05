@@ -1,7 +1,10 @@
 import React from 'react';
 import './RegisterForm.scss';
+import {useUser} from '../../context/userContext';
 
-function SignupForm({handleChange, handleRegister}) {
+function SignupForm() {
+
+    const {handleChange, handleRegister} = useUser();
 
 
     return (
@@ -40,17 +43,6 @@ function SignupForm({handleChange, handleRegister}) {
                 type='password'
                 placeholder='Password'
                 onChange={handleChange} />
-            </label>
-            <label
-            className='register__label'            
-            name='phone'>
-                Phone number 
-                <input
-                className='register__input'
-                name='phone'
-                type='text'
-                placeholder='Phone Number'
-                onChange={handleChange}  />
             </label>
             <label
             className='register__label' 

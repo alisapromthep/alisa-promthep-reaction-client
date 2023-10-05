@@ -1,14 +1,18 @@
 import React from 'react';
 import './RegisterPage.scss'
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
-import {Redirect} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import HeroImg from '../../components/HeroImg/HeroImg';
+import { useUser } from '../../context/userContext';
 
-const RegisterPage = ({isRegister,handleChange,handleRegister, username}) => {
+const RegisterPage = () => {
+
+    const {userInfo, isRegister} = useUser();
+
     {
         if(isRegister){
-            return <Redirect to={`/profile/${username}`} />
+            return <Navigate to={`/profile/${userInfo.username}`} />
         } else {
             return (
                 <div className='register'>
@@ -17,9 +21,7 @@ const RegisterPage = ({isRegister,handleChange,handleRegister, username}) => {
                     </div>
                     <main className='register__form-container'>
                         <Header headerTitle='Register'/>
-                    <RegisterForm
-                    handleChange={handleChange}
-                    handleRegister={handleRegister} />
+                    <RegisterForm/>
                     </main>
                 </div>
             );
